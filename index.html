@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
+
 <body onload="onInit()">
-    <div id="container">  
+    <div id="container" class="container">
+        <table class="boardUI">
+            <tr>
+                <td class="marksCountDisplay"> marks : <span> </span>
+                </td>
+                <td class="livesCountDisplay"> lives :<span> </span>
+                </td>
+                <td class="timeDisplay"> time :<span> </span>
+                </td>
+            </tr>
+        </table>
         <table class="board">
-           
+
         </table>
     </div>
 
     <script src="js/game.js"></script>
     <script src="js/levels.js"></script>
 </body>
+
 </html>
