@@ -13,6 +13,7 @@ const HINT = '❓'
 const EMPTYHINT = '❔'
 const NIGHTMODE = '🌚'
 const DAYMODE = '🌞'
+const LEVEL = '🎚️'
 
 
 var gCurrectLevel = null
@@ -27,6 +28,7 @@ var gIsFirstClick = false
 var gHints = 3
 var gClickedOnHint = false
 var gIDforSeconds = null
+var gUserLevel = 0
 
 
 var gGame = {
@@ -38,7 +40,7 @@ var gGame = {
 
 function onInit() {
     initVariables()
-    gCurrectLevel = levels[BEGINNERLEVEL]
+    gCurrectLevel = levels[gUserLevel]
     gBoard = buildBoard()
     renderBoard()
     enableRightClickOnContainer()
@@ -47,6 +49,7 @@ function onInit() {
     renderHints()
     renderRestartButton()
     renderNightMode()
+    renderLevelHandling()
 }
 
 function initVariables() {
@@ -84,7 +87,7 @@ function buildBoard() {
 function setMinesNegsCount(firstI, firstJ) {
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard[0].length; j++) {
-            if(i === firstI && j === firstJ) continue
+            if (i === firstI && j === firstJ) continue
             const count = findMinesNegsCount(i, j)
             gBoard[i][j].minesAroundCount = count
         }
@@ -131,11 +134,11 @@ function randomMines(firstI, firstJ) {
     }
 }
 
-function objectsCellPositionArray(firstI,firstJ) {
+function objectsCellPositionArray(firstI, firstJ) {
     const array = []
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard[0].length; j++) {
-            if(i === firstI && j === firstJ) continue
+            if (i === firstI && j === firstJ) continue
             array.push({ i: i, j: j })
         }
     }
@@ -143,8 +146,6 @@ function objectsCellPositionArray(firstI,firstJ) {
 }
 
 function onCellLeftClicked(elCell, i, j) {
-
-    console.log(`left Click on cell ${i}, ${j}`)
     handleLeftClick(elCell, i, j)
     gLives === 0 ? handleLose(elCell, i, j) : null
 }
@@ -152,7 +153,7 @@ function onCellLeftClicked(elCell, i, j) {
 function handleLeftClick(elCell, i, j) {
     if (!gIsFirstClick) {
         randomMines(i, j)
-        setMinesNegsCount(i,j)
+        setMinesNegsCount(i, j)
         renderBoard()
         expandShown(i, j, elCell)
         const elbtn = getButtonElement({ i: i, j: j })
@@ -161,11 +162,11 @@ function handleLeftClick(elCell, i, j) {
     }
     if (gClickedOnHint) {
         toggleShowNighForASeconds(i, j, true)
-         setTimeout(() => {
-            toggleShowNighForASeconds(i, j, false) 
+        setTimeout(() => {
+            toggleShowNighForASeconds(i, j, false)
         }, 1000)
         gClickedOnHint = false
-    }else{
+    } else {
         const cell = gBoard[i][j]
         if (gLives === 0) return
         elCell.style.backgroundColor = gColorGray
@@ -185,11 +186,17 @@ function handleLeftClick(elCell, i, j) {
             }
         }
     }
-    
+
 }
 
 function handleLose(elCell, i, j) {
+    const explodeElm = document.querySelector('.explodeGif')
+    explodeElm.innerHTML = '<img src="gif/YQDj.gif"></img>'
+    setTimeout(() => {
+        explodeElm.innerHTML = ''
+    }, 1800);
     gIsOn = false
+    console.log(explodeElm)
     renderRestartButton()
     reavelAllMines(i, j, elCell)
     clearInterval(gTimeIntervalID)
@@ -389,7 +396,6 @@ function renderHints() {
 
 }
 
-
 function clickOnHint() {
     gHints--
     if (gHints < 0) return
@@ -408,7 +414,6 @@ function clickOnHint() {
     gClickedOnHint = true
 }
 
-
 function toggleShowNighForASeconds(rows, cols, condition) {
     for (var i = rows - 1; i <= rows + 1; i++) {
         if (i < 0 || i >= gBoard.length) continue
@@ -416,23 +421,22 @@ function toggleShowNighForASeconds(rows, cols, condition) {
             if (i === rows && j === cols) continue
             if (j < 0 || j >= gBoard[0].length) continue
             const currCell = gBoard[i][j]
-            if(currCell.isMarked) continue
+            if (currCell.isMarked) continue
             const elbtn = getButtonElement({ i: i, j: j })
             //MODEL
             currCell.isShown = condition
-            console.log(i, j,' is : ', currCell.isShown)
+            console.log(i, j, ' is : ', currCell.isShown)
             //DOM
-            if(condition){
+            if (condition) {
                 onCallShown(i, j)
             }
-            else{
+            else {
                 renderButton({ i: i, j: j }, '')
                 elbtn.style.backgroundColor = gColorBurlywood
             }
         }
     }
 }
-
 
 function renderNightMode() {
     const elbtn = document.querySelector('.nightModeBtn')
@@ -452,6 +456,21 @@ function clickOnNightMode() {
     }
 }
 
+function renderLevelHandling(){
+    const elbtn = document.querySelector('.levelHandlingBtn')
+    elbtn.innerHTML = '🎚️'
+}
+
+function manageLevelHandling(){
+    if(gUserLevel === 0){
+        gUserLevel = 1
+    }else if(gUserLevel === 1){
+        gUserLevel = 2
+    }else if(gUserLevel === 2){
+        gUserLevel = 0
+    }
+    onInit()
+}
 
 function makeId(length = 6) {
     var txt = ''

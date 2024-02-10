@@ -101,6 +101,13 @@ body {
    border: none; 
 }
 
+.levelHandlingButton{
+   background-color: burlywood;
+   border-color:burlywood ;
+   font-size: xx-large;
+   text-align: center;
+   border: none; 
+}
 
 
 .nightMode{
@@ -111,4 +118,9 @@ body {
 .dayMode{
    background-color: white;
    color: black;
+}
+
+.explodeGif{
+position: relative;
+z-index:99
 }
