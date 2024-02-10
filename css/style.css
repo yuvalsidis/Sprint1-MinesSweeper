@@ -1,10 +1,10 @@
 body {
-   background-color: black;
    display: flex;
    justify-content: center;
-   align-items: center;
+   align-items:center;
    height: 100vh;
    margin: 0;
+   
 }
 
 .board {
@@ -14,6 +14,22 @@ body {
    border-width: 0.6px;
    display: table;
    overflow: auto;
+}
+
+.boardUI{
+   align-self:flex-start;
+   position: absolute;
+   background-color:  rgb(158, 153, 76);
+   border-style: solid;
+   border-width: 2px;
+   color: mix(black, white, 25%)
+}
+
+.uiDisplay{
+   width: 120px;
+   height: 50px;
+   text-align: center;
+   font-size: larger;
 }
 
 .container {
@@ -32,34 +48,67 @@ body {
    border-radius: 4px;
    background-color: burlywood;
    font-size: xx-large;
+   border-style:outset
 }
 
+
 .marksCountDisplay {
-   width: 70px;
-   height: 50px;
    background-color: burlywood;
 }
 
 .livesCountDisplay {
-   width: 70px;
-   height: 50px;
    background-color: burlywood;
 }
 
 .timeDisplay {
-   width: 70px;
-   height: 50px;
    background-color: burlywood;
+   text-align:left
 }
 
 .restartButton {
-   width: 70px;
-   height: 50px;
+   background-color: burlywood;
+}
+
+.hints{
+   background-color: burlywood;
+}
+
+.nightModeButton{
    background-color: burlywood;
 }
 
 .restartBtn {
-   position: 100%;
-   font-size: xx-large;
    background-color: burlywood;
+   border-color:burlywood ;
+   font-size: xx-large;
+   text-align: center;
+   border: none; 
+}
+
+.hintsBtn{
+   background-color: burlywood;
+   border-color:burlywood ;
+   font-size: xx-large;
+   text-align: center;
+   border: none; 
+}
+
+.nightModeBtn{
+   background-color: burlywood;
+   border-color:burlywood ;
+   font-size: xx-large;
+   text-align: center;
+   border: none; 
+}
+
+
+
+.nightMode{
+   background-color: #000000;
+   color: antiquewhite;
+}
+
+.dayMode{
+   background-color: white;
+   color: black;
 }

@@ -9,23 +9,34 @@
 </head>
 
 <body onload="onInit()">
+
+    <table class="boardUI">
+        <tr>
+            <td class="marksCountDisplay uiDisplay"> Marks : <span> </span>
+            </td>
+            <td class="livesCountDisplay uiDisplay"> Lives :<span> </span>
+            </td>
+            <td class="timeDisplay uiDisplay"> Time :<span> </span>
+            </td>
+            <td class="restartButton  uiDisplay">
+                <button class="restartBtn" onclick="onClickRestart()"></button>
+            </td>
+            <td class="hints uiDisplay">
+                <button class="hintsBtn" onclick="clickOnHint()"></button>
+            </td>
+            <td class="nightModeButton uiDisplay">
+                <button class="nightModeBtn" onclick="clickOnNightMode()"></button>
+            </td>
+        </tr>
+    </table>
+
     <div id="container" class="container">
-        <table class="boardUI">
-            <tr>
-                <td class="marksCountDisplay"> marks : <span> </span>
-                </td>
-                <td class="livesCountDisplay"> lives :<span> </span>
-                </td>
-                <td class="timeDisplay"> time :<span> </span>
-                </td>
-                <td class="restartButton">
-                    <button class="restartBtn" onclick="onClickRestart()">restart</button>
-                </td>
-            </tr>
-        </table>
         <table class="board">
         </table>
     </div>
+
+
+
 
     <script src="js/game.js"></script>
     <script src="js/levels.js"></script>
