@@ -77,6 +77,10 @@ body {
    background-color: burlywood;
 }
 
+.levelHandlingButton{
+   background-color: burlywood;
+}
+
 .restartBtn {
    background-color: burlywood;
    border-color:burlywood ;
@@ -101,7 +105,7 @@ body {
    border: none; 
 }
 
-.levelHandlingButton{
+.levelHandlingBtn{
    background-color: burlywood;
    border-color:burlywood ;
    font-size: xx-large;
